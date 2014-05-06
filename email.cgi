@@ -75,3 +75,4 @@ def delete_log_file():
 
 send_email()
 delete_log_file()
+print HTML_TEMPLATE % {'MESSAGE':'Email Sent!'}
