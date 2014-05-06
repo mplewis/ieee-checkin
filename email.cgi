@@ -3,12 +3,11 @@ import cgi
 import cgitb
 cgitb.enable()
 import os
+import subprocess
 import smtplib #Import smtplib for sending function
 from email.mime.text import MIMEText #Import the email modules needed
 
 UPLOAD_TXT_NAME = 'checkin.txt'
-SMTP_PORT = 587
-SMTP_SERVER = 'smtp.gmail.com'
 
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html>
@@ -41,34 +40,13 @@ def send_email():
         return
 
     if 'recipient' not in form:
-        print HTML_TEMPLATE % {'MESSAGE':'No  specified'}
-        return
-
-    if 'sender' not in form:
-        print HTML_TEMPLATE % {'MESSAGE':'No sender specified'}
-        return
-
-    if 'password' not in form:
-        print HTML_TEMPLATE % {'MESSAGE':'No password specified'}
+        print HTML_TEMPLATE % {'MESSAGE':'No recipient specified'}
         return
 
     subject = form.getfirst('subject').strip()
     recipient = form.getfirst('recipient').strip()
-    sender = form.getfirst('sender').strip()
-    password = form.getfirst('password').strip()
-
-    with open(UPLOAD_TXT_NAME, 'rb') as f:
-        msg = MIMEText(f.read())
-
-    session = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-
-    session.ehlo()
-    session.starttls()
-    session.ehlo
-    session.login(sender, password)
-
-    session.sendmail(sender, recipient, msg.as_string())
-    session.quit()
+    
+    subprocess.call("cat checkin.txt | mail -s " + subject + " -t " + recipient, shell=True)
 
 def delete_log_file():
     os.remove(UPLOAD_TXT_NAME)
