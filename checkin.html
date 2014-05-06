@@ -30,11 +30,14 @@
                 <input class="form-control input-lg margin-sm-after" type="text" name="studentID" id="studentID" placeholder="Student ID">
                 <button class="form-control input-lg btn btn-info check-in" type="submit"><i class="fa fa-check"></i> Check In</button>
             </form>
-            <form class="boxed-section" action="email.cgi" method="POST" enctype="multipart/form-data" role="form">
+            <form class="boxed-section margin-lg-after" action="email.cgi" method="POST" enctype="multipart/form-data" role="form">
                 <input class="form-control input-lg margin-sm-after" type="email" name="recipient" id="recipient" placeholder="Recipient">
                 <input class="form-control input-lg margin-sm-after" type="text" name="subject" id="subject" placeholder="Subject">
                 <button class="form-control input-lg btn btn-info check-in" type="submit"><i class="fa fa-envelope"></i> Send Email</button>
             </form>
+            <form class="boxed-section" action="confirm.html" method="get">
+                <input type="submit" value="Go to my link location" name="Submit" id="frm1_submit" />
+            </form>            
             <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
             <p class="footer">Powered by the IEEE Tech Subcommittee</p>
         </div>
