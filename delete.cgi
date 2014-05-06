@@ -33,9 +33,9 @@ print 'content-type: text/html\n\n'
 
 def delete_log_file():
     os.remove(UPLOAD_TXT_NAME)
+    f = open(UPLOAD_TXT_NAME)
+    f.close()
 
 delete_log_file()
-f = open(UPLOAD_TXT_NAME)
-f.close()
 
 print HTML_TEMPLATE % {'MESSAGE':'Previous log file successfully deleted!'}
