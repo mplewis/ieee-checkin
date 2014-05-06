@@ -32,6 +32,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 print 'content-type: text/html\n\n'
 
 def delete_log_file():
+    f = open(UPLOAD_TXT_NAME, 'a')
+    f.close()
     os.remove(UPLOAD_TXT_NAME)
     f = open(UPLOAD_TXT_NAME, 'a')
     f.close()
