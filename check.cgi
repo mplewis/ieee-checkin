@@ -85,10 +85,11 @@ def save_card(form_field, upload_dir):
         return False
 
 print 'content-type: text/html\n\n'
-save_card("cardtxt", UPLOAD_TXT_PATH)
-save1 = save_description("firstname", UPLOAD_TXT_PATH)
-save2 = save_description("lastname", UPLOAD_TXT_PATH)
-save3 = save_description("studentID", UPLOAD_TXT_PATH)
-
-if (save1 and save2 and save3):
-    print HTML_TEMPLATE % {'MESSAGE': 'Description uploaded successfully in ' + UPLOAD_TXT_PATH}
+if 'cardtxt' in form:
+    save_card("cardtxt", UPLOAD_TXT_PATH)
+else:
+    save1 = save_description("firstname", UPLOAD_TXT_PATH)
+    save2 = save_description("lastname", UPLOAD_TXT_PATH)
+    save3 = save_description("studentID", UPLOAD_TXT_PATH)
+    if (save1 and save2 and save3):
+        print HTML_TEMPLATE % {'MESSAGE': 'Description uploaded successfully in ' + UPLOAD_TXT_PATH}
