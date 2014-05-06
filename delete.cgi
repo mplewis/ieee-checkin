@@ -33,7 +33,7 @@ print 'content-type: text/html\n\n'
 
 def delete_log_file():
     os.remove(UPLOAD_TXT_NAME)
-    f = open(UPLOAD_TXT_NAME)
+    f = open(UPLOAD_TXT_NAME, 'a')
     f.close()
 
 delete_log_file()
