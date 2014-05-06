@@ -1,4 +1,4 @@
-AuthName "Restricted Area" 
+AuthName "IEEE Exclusive Check-in Script" 
 AuthType Basic 
 AuthUserFile /home/vuong033/.www/.htpasswd 
 AuthGroupFile /dev/null 
