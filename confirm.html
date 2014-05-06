@@ -17,9 +17,11 @@
             <h1 class="pre-header">University of Minnesota</h1>
             <img class="logo" src="images/ieee.svg">
             <h1 class="post-header">Are you sure you want to create a new check in?</h1>
-            <form class="boxed-section" action="delete.cgi" method="get">
-                <button class="form-control input-lg btn btn-info check-in" type="submit" value="confirm.html"><i class="fa fa-check-square"></i> YES</button>
-                <button class="form-control input-lg btn btn-info check-in" type="submit" value="confirm.html"><i class="fa fa-ban"></i> NO</button>
+            <form class="boxed-section margin-lg-after" action="delete.cgi" method="get">
+                <button class="form-control input-lg btn btn-info check-in" type="submit" value="delete.cgi"><i class="fa fa-check-square"></i> YES</button>
+            </form>
+            <form class="boxed-section" action="checkin.html" method="get">
+                <button class="form-control input-lg btn btn-info check-in" type="submit" value="checkin.html"><i class="fa fa-ban"></i> NO</button>
             </form>            
             <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
             <p class="footer">Powered by the IEEE Tech Subcommittee</p>
