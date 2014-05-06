@@ -7,7 +7,8 @@ import smtplib #Import smtplib for sending function
 from email.mime.text import MIMEText #Import the email modules needed
 
 UPLOAD_TXT_NAME = 'checkin.txt'
-SENDER = 'vuong033@umn.edu'
+SMTP_PORT = 587
+SMTP_SERVER = 'smtp.gmail.com'
 
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html>
@@ -32,24 +33,42 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
 form = cgi.FieldStorage()
 
-def send_email():
-    if 'emailAddress' not in form:
-        print HTML_TEMPLATE % {'MESSAGE':'No email specified'}
-        return
+print 'content-type: text/html\n\n'
 
+def send_email():
     if 'subject' not in form:
         print HTML_TEMPLATE % {'MESSAGE':'No subject specified'}
         return
 
-    emailAddress = form.getfirst('emailAddress').strip()
+    if 'recipient' not in form:
+        print HTML_TEMPLATE % {'MESSAGE':'No  specified'}
+        return
+
+    if 'sender' not in form:
+        print HTML_TEMPLATE % {'MESSAGE':'No sender specified'}
+        return
+
+    if 'password' not in form:
+        print HTML_TEMPLATE % {'MESSAGE':'No password specified'}
+        return
+
     subject = form.getfirst('subject').strip()
+    recipient = form.getfirst('recipient').strip()
+    sender = form.getfirst('sender').strip()
+    password = form.getfirst('password').strip()
 
     with open(UPLOAD_TXT_NAME, 'rb') as f:
         msg = MIMEText(f.read())
 
-    s = smtplib.SMTP('localhost')
-    s.sendmail(SENDER, emailAddress, msg.as_string())
-    s.quit()
+    session = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+
+    session.ehlo()
+    session.starttls()
+    session.ehlo
+    session.login(sender, password)
+
+    session.sendmail(sender, recipient, msg.as_string())
+    session.quit()
 
 def delete_log_file():
     os.remove(UPLOAD_TXT_NAME)
