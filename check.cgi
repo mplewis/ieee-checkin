@@ -33,7 +33,8 @@ form = cgi.FieldStorage()
 
 
 def save_description(form_field, upload_dir):
-    if 'form_field' not in form:
+    if form_field not in form:
+        print HTML_TEMPLATE % {'MESSAGE': 'Field %s not found in form' % form_field}
         return False
     try:
         description = form.getfirst(form_field).upper().strip()
@@ -52,7 +53,8 @@ def save_description(form_field, upload_dir):
 
 
 def save_card(form_field, upload_dir):
-    if 'form_field' not in form:
+    if form_field not in form:
+        print HTML_TEMPLATE % {'MESSAGE': 'Field %s not found in form' % form_field}
         return False
 
     raw = form.getfirst(form_field)
