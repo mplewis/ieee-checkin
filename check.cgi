@@ -13,7 +13,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <head>
         <title>File Upload</title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-        <meta http-equiv="refresh" content="1; url=http://z.umn.edu/ieeecheckin" />
+        <meta http-equiv="refresh" content="1; url=checkin.html" />
     </head>
     <body>
         <h1>File Upload</h1>
