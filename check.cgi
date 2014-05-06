@@ -13,7 +13,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <head>
         <title>File Upload</title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-        <meta http-equiv="refresh" content="1; url=http://z.umn.edu/ieeecheckin" />
+        <meta http-equiv="refresh" content="1; url=checkin.html" />
     </head>
     <body>
         <h1>File Upload</h1>
@@ -33,10 +33,11 @@ form = cgi.FieldStorage()
 
 
 def save_description(form_field, upload_dir):
-    if 'form_field' not in form:
+    if form_field not in form:
+        print HTML_TEMPLATE % {'MESSAGE': 'Field %s not found in form' % form_field}
         return False
     try:
-        description = form[form_field].value.upper().strip()
+        description = form.getfirst(form_field).upper().strip()
 
         fout = file(upload_dir, 'a')
         if (form_field == "studentID"):
@@ -52,10 +53,11 @@ def save_description(form_field, upload_dir):
 
 
 def save_card(form_field, upload_dir):
-    if 'form_field' not in form:
+    if form_field not in form:
+        print HTML_TEMPLATE % {'MESSAGE': 'Field %s not found in form' % form_field}
         return False
 
-    raw = form[form_field].value
+    raw = form.getfirst(form_field)
 
     # parsing the card information
     # specific for your card
@@ -83,10 +85,11 @@ def save_card(form_field, upload_dir):
         return False
 
 print 'content-type: text/html\n\n'
-save_card("cardtxt", UPLOAD_TXT_PATH)
-save1 = save_description("firstname", UPLOAD_TXT_PATH)
-save2 = save_description("lastname", UPLOAD_TXT_PATH)
-save3 = save_description("studentID", UPLOAD_TXT_PATH)
-
-if (save1 and save2 and save3):
-    print HTML_TEMPLATE % {'MESSAGE': 'Description uploaded successfully in ' + UPLOAD_TXT_PATH}
+if 'cardtxt' in form:
+    save_card("cardtxt", UPLOAD_TXT_PATH)
+else:
+    save1 = save_description("firstname", UPLOAD_TXT_PATH)
+    save2 = save_description("lastname", UPLOAD_TXT_PATH)
+    save3 = save_description("studentID", UPLOAD_TXT_PATH)
+    if (save1 and save2 and save3):
+        print HTML_TEMPLATE % {'MESSAGE': 'Description uploaded successfully in ' + UPLOAD_TXT_PATH}
