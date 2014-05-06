@@ -36,7 +36,7 @@ def save_description(form_field, upload_dir):
     if 'form_field' not in form:
         return False
     try:
-        description = form[form_field].value.upper().strip()
+        description = form.getfirst(form_field).upper().strip()
 
         fout = file(upload_dir, 'a')
         if (form_field == "studentID"):
@@ -55,7 +55,7 @@ def save_card(form_field, upload_dir):
     if 'form_field' not in form:
         return False
 
-    raw = form[form_field].value
+    raw = form.getfirst(form_field)
 
     # parsing the card information
     # specific for your card
