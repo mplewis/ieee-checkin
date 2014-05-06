@@ -31,6 +31,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </html>"""
 
 form = cgi.FieldStorage()
+#create a blank file to send if nothing is available
+f = file(UPLOAD_TXT_NAME, 'a')
+f.close()
 
 print 'content-type: text/html\n\n'
 
@@ -46,11 +49,11 @@ def send_email():
     subject = form.getfirst('subject').strip()
     recipient = form.getfirst('recipient').strip()
     
-    subprocess.call("cat checkin.txt | mail -s " + subject + " -t " + recipient, shell=True)
+    subprocess.call("cat checkin.txt | mail -s " + subject + " " + recipient, shell=True)
 
 def delete_log_file():
     os.remove(UPLOAD_TXT_NAME)
 
 send_email()
-delete_log_file()
+#delete_log_file()
 print HTML_TEMPLATE % {'MESSAGE':'Email Sent!'}
