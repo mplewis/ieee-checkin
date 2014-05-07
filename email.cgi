@@ -49,11 +49,8 @@ def send_email():
     subject = form.getfirst('subject').strip()
     recipient = form.getfirst('recipient').strip()
     
-    subprocess.call("cat checkin.txt | mail -s " + subject + " " + recipient, shell=True)
-
-def delete_log_file():
-    os.remove(UPLOAD_TXT_NAME)
+    subprocess.call("cat checkin.txt | mail -s " +
+    "\" " + subject + "\" " + recipient, shell=True)
 
 send_email()
-#delete_log_file()
 print HTML_TEMPLATE % {'MESSAGE':'Email Sent!'}
